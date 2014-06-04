@@ -1,6 +1,6 @@
 # Attribution
 
-This styleguide is a modification of [bbatsov/ruby-style-guide](https://github.com/bbatsov/ruby-style-guide) to reflect the needs of the Metis Students
+This styleguide is a modification of [bbatsov/ruby-style-guide](https://github.com/bbatsov/ruby-style-guide) to reflect the needs of the Metis students.
 
 ## Table of Contents
 
@@ -179,8 +179,8 @@ This styleguide is a modification of [bbatsov/ruby-style-guide](https://github.c
   end
   ```
 
-* Avoid comma after the last parameter in a method call, especially when the
-  parameters are not on separate lines.
+* Add a comma after every parameter in a multi-line method call. It makes
+  it easier to move parameters around without adding/removing commas.
 
   ```Ruby
   # bad - easier to move/add/remove parameters, but still not preferred
@@ -293,8 +293,6 @@ This styleguide is a modification of [bbatsov/ruby-style-guide](https://github.c
 * Limit lines to 80 characters.
 
 * Avoid trailing whitespace.
-
-* End each file with a newline.
 
 * Don't use block comments ever. They cannot be preceded by whitespace and are not
   as easy to spot as regular comments.
@@ -419,7 +417,7 @@ This styleguide is a modification of [bbatsov/ruby-style-guide](https://github.c
   ```
 
   ```
-* Never inline an if conditional.
+* Never inline an `if` conditional.
 
   ```Ruby
   # bad
@@ -872,92 +870,6 @@ This styleguide is a modification of [bbatsov/ruby-style-guide](https://github.c
   always use parentheses in the method invocation. For example, write
   `f((3 + 2) + 1)`.
 
-* Use the new lambda literal syntax for single line body blocks. Use the
-  `lambda` method for multi-line blocks.
-
-  ```Ruby
-  # bad
-  l = lambda { |a, b| a + b }
-  l.call(1, 2)
-
-  # correct, but looks extremely awkward
-  l = ->(a, b) do
-    tmp = a * 7
-    tmp * b / 50
-  end
-
-  # good
-  l = ->(a, b) { a + b }
-  l.call(1, 2)
-
-  l = lambda do |a, b|
-    tmp = a * 7
-    tmp * b / 50
-  end
-  ```
-
-* Prefer `proc` over `Proc.new`.
-
-  ```Ruby
-  # bad
-  p = Proc.new { |n| puts n }
-
-  # good
-  p = proc { |n| puts n }
-  ```
-
-* Prefer `proc.call()` over `proc[]` or `proc.()` for both lambdas and procs.
-
-  ```Ruby
-  # bad - looks similar to Enumeration access
-  l = ->(v) { puts v }
-  l[1]
-
-  # also bad - uncommon syntax
-  l = ->(v) { puts v }
-  l.(1)
-
-  # good
-  l = ->(v) { puts v }
-  l.call(1)
-  ```
-
-* Prefix with `_` unused block parameters and local variables. It's
-  also acceptable to use just `_` (although it's a bit less
-  descriptive). This convention is recognized by the Ruby interpreter
-  and tools like RuboCop and will suppress their unused variable warnings.
-
-  ```Ruby
-  # bad
-  result = hash.map { |k, v| v + 1 }
-
-  def something(x)
-    unused_var, used_var = something_else(x)
-    # ...
-  end
-
-  # good
-  result = hash.map { |_k, v| v + 1 }
-
-  def something(x)
-    _unused_var, used_var = something_else(x)
-    # ...
-  end
-
-  # good
-  result = hash.map { |_, v| v + 1 }
-
-  def something(x)
-    _, used_var = something_else(x)
-    # ...
-  end
-  ```
-
-* Use `$stdout/$stderr/$stdin` instead of
-  `STDOUT/STDERR/STDIN`. `STDOUT/STDERR/STDIN` are constants, and
-  while you can actually reassign (possibly to redirect some stream)
-  constants in Ruby, you'll get an interpreter warning if you do so.
-
 * Favor the use of predicate methods to explicit comparisons with
   `==`. Numeric comparisons are OK.
 
@@ -990,10 +902,6 @@ This styleguide is a modification of [bbatsov/ruby-style-guide](https://github.c
   ```
 
 ## Naming
-
-> The only real difficulties in programming are cache invalidation and
-> naming things. <br/>
-> -- Phil Karlton
 
 * Name identifiers in English.
 
@@ -1178,12 +1086,6 @@ This styleguide is a modification of [bbatsov/ruby-style-guide](https://github.c
 
 ## Comments
 
-> Good code is its own best documentation. As you're about to add a
-> comment, ask yourself, "How can I improve the code so that this
-> comment isn't needed?" Improve the code and then document it to make
-> it even clearer. <br/>
-> -- Steve McConnell
-
 * Write self-documenting code and ignore the rest of this section. Seriously!
 
 * Write comments in English.
@@ -1204,11 +1106,8 @@ This styleguide is a modification of [bbatsov/ruby-style-guide](https://github.c
 * Keep existing comments up-to-date. An outdated comment is worse than no comment
   at all.
 
-> Good code is like a good joke - it needs no explanation. <br/>
-> -- Russ Olsen
-
 * Avoid writing comments to explain bad code. Refactor the code to
-  make it self-explanatory. (Do or do not - there is no try. --Yoda)
+  make it self-explanatory.
 
 ## Classes & Modules
 
