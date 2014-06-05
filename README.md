@@ -1438,11 +1438,11 @@ This styleguide is a modification of [bbatsov/ruby-style-guide](https://github.c
   STATES = %i(draft open closed)
   ```
 
-* Avoid comma after the last item of an `Array` or `Hash` literal, especially
-  when the items are not on separate lines.
+* Add a comma after every parameter in a multi-line method call. It makes it
+easier to move parameters around without adding/removing commas.
 
   ```Ruby
-  # bad - easier to move/add/remove items, but still not preferred
+  # good
   VALUES = [
              1001,
              2020,
